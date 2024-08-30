@@ -7,7 +7,6 @@ import com.store.app_demo.domain.entity.Store;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +45,7 @@ public class StoreRestController {
                 .findFirst();
         if (storeToRemove.isPresent()) {
             lstStore.remove(storeToRemove.get());
-            return "Producto eliminando con écito";
+            return "Producto eliminado con éxito";
         } else {
             return "Producto no encontrado";
         }
