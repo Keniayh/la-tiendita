@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -35,5 +38,17 @@ public class StoreRestController {
         store.setNombre(store.getNombre().toUpperCase());
         lstStore.add(store);
         return store;
-    } 
+    }
+    @DeleteMapping("deletestore/{codigo}")
+    public String deleteProduct(@PathVariable String codigo) {
+        Optional<Store> storeToRemove = lstStore.stream()
+                .filter(store -> store.getCodigo().equals(codigo))
+                .findFirst();
+        if (storeToRemove.isPresent()) {
+            lstStore.remove(storeToRemove.get());
+            return "Producto eliminando con écito";
+        } else {
+            return "Producto no encontrado";
+        }
+    }
 }
